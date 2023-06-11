@@ -337,7 +337,7 @@ header{
   }
   &__title{
     font-weight: 700;
-    @include adaptiv-font(22, 20);
+    font-size: 22px;
     line-height: 26px;
 
     text-align: center;
@@ -346,6 +346,7 @@ header{
     margin-bottom: 20px;
     @media (max-width: 700px){
       width: 100%;
+      @include adaptiv-font(22, 20);
     }
     span{
       color: rgba(255, 52, 89, 1);
@@ -380,7 +381,7 @@ header{
     max-width: 248px;
     width: 100%;
     font-weight: 700;
-    @include adaptiv-font(15, 14);
+    font-size: 15px;
     line-height: 24px;
     color: #FFFFFF;
     padding: 13px 43px 14px 43px;
@@ -394,6 +395,7 @@ header{
       background-color: #4252D1;
     }
     @media (max-width: 700px){
+      @include adaptiv-font(15, 14);
       width: 100%;
       max-width: 100%;
     }
