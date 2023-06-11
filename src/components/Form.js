@@ -122,52 +122,21 @@ export const Form = () => {
         const formData = {name: inputName,
                           phone: phoneNumber,
                           email: inputEmail};
-        console.log(formData)
-        try {
-          const response = await axios.post('https://api.sendgrid.com/v3/mail/send', {
-            personalizations: [
-              {
-                to: [
-                  {
-                    email: 'microsmag@ukr.net', // Замените на адрес получателя
-                  },
-                ],
-                subject: 'Новое сообщение',
-              },
-            ],
-            from: {
-              email: 'alextod988@gmail.com', // Замените на ваш адрес электронной почты
-            },
-            content: [
-              {
-                type: 'text/plain',
-                value: formData,
-              },
-            ],
-          }, {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer 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`, // Замените на ваш API-ключ SendGrid
-            },
-          });
-    
-          console.log('Письмо успешно отправлено!', response);
-        } catch (error) {
-          console.error('Ошибка отправки письма:', error);
-        }
-        // fetch("https://example.com/submit", {
-        //   method: "POST",
+        // fetch('http://example.com', {
+        //   method: 'POST',
         //   headers: {
-        //     "Content-Type": "application/json",
+        //     'Content-Type': 'application/json'
         //   },
-        //   body: JSON.stringify(formData),
-        // }) .then((response) => response.json())
-        // .then((data) => {
-        //   console.log("Form data sent successfully:", data);
+        //   body: JSON.stringify(formData)
         // })
-        // .catch((error) => {
-        //   console.error("Error sending form data:", error);
-
+        // .then(response => response.text())
+        // .then(data => {
+        //   console.log(data);
+        //   // Дополнительные действия при успешной отправке письма
+        // })
+        // .catch(error => {
+        //   console.error(error);
+        //   // Обработка ошибки при отправке письма
         // });
         setInputName("");
         setPhoneNumber("");
@@ -201,7 +170,6 @@ export const Form = () => {
     const handlePhoneNumberChange = (value) => {
       setPhoneNumber(value);
       if(value.length<12){
-        console.log(value + " " + value.length)
         setValidNumber(false)
       }
       else{
@@ -209,12 +177,6 @@ export const Form = () => {
       }
     };
 
-
-    useEffect(()=>{
-      console.log(isValidName + " isValidName")
-      console.log(isValidEmail + " isValidEmail")
-      console.log(isValidNumber + " isValidNumber")
-  }, [isValidName, isValidEmail, isValidNumber])
     const handleChangeEmail = (event) => {
       setInputEmail(event.target.value);
       setIsValidEmail(validateEmail(event.target.value));
@@ -229,43 +191,23 @@ export const Form = () => {
             <div className="form__title">Запишитесь <span>бесплатно</span> и получите подарок</div>
             <div className="form__input-container">
               <input className={isValidName?"form__input wrong":"form__input"} type="text" value={inputName} onChange={handleChange} placeholder="Ваше имя и фамилия"></input>
-              {!isValidName&&isSubmit?<p>Please enter a name.</p>: null}
+              {!isValidName&&isSubmit?<p>Введите имя и фамилию.</p>: null}
             </div>
             <div className="form__input-container">
                 <PhoneInput
                   country={'ua'}
                   value={phoneNumber}
                   onChange={(value, country)=>{handlePhoneNumberChange(value); isValidPhoneNumberHandle(value, country);}}
-                  //onChange={handlePhoneNumberChange}
                   containerClass="form__input-wrapper"
                   inputClass="form__input"
                   buttonClass="form__input-dropdown"
                   searchClass="form__input-search"
-                  // isValid={(value, country) => {
-                  //   console.log("WOrk")
-                  //   if(phones[country.iso2]){
-                  //       if (phones[country.iso2].test(value)) {
-                  //         setValidNumber(true)
-                  //       }
-                  //       else {
-                  //         setValidNumber(false)
-                  //       }
-                  //   }
-                  //   else{
-                  //       if(value.length<10){
-                  //         setValidNumber(false)
-                  //       }
-                  //       else{
-                  //         setValidNumber(true)  
-                  //       }
-                  //   }
-                  // }}
                 />
-                {!isValidNumber&&isSubmit?<p>Please enter a correct phone number.</p>:null}
+                {!isValidNumber&&isSubmit?<p>Введите правильный номер телефона.</p>:null}
             </div>
             <div className="form__input-container">
               <input className="form__input" placeholder="Ваш email" value={inputEmail} onChange={handleChangeEmail}></input>
-              {!isValidEmail&&isSubmit?<p>Please enter a correct email.</p>: null}
+              {!isValidEmail&&isSubmit?<p>Введите правильный email.</p>: null}
             </div>
             <button className="form__button">Записаться бесплатно</button>
             <div className="form__policy">Нажимая на кнопку я согашаюсь 
