@@ -43,7 +43,14 @@ $maxWidth: 958;
  $maxWidth: $maxWidth - 320;
  font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
 }
-
+#root{
+  width: 100%;
+}
+.App{
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
 html, 
 body{
   margin: 0;
@@ -81,6 +88,9 @@ body{
   opacity: 0.8;
   width: 56%;
   padding-top: 56%;
+  @media (max-width: 1000px){
+    right: 0;
+  }
 }
 header{
   max-width: 958px;
